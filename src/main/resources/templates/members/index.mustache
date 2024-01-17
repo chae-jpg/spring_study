@@ -10,11 +10,12 @@
     <tbody>
     {{#memberList}}
         <tr>
-            <th>{{id}}</th>
+            <th><a href="/members/{{id}}">{{id}}</a></th>
             <td>{{email}}</td>
             <td>{{password}}</td>
         </tr>
     {{/memberList}}
     </tbody>
 </table>
+<a href="/signup">회원가입</a>
 {{>layouts/footer}}
