@@ -51,4 +51,25 @@ public class MemberController {
         model.addAttribute("memberList", memberEntityList);
         return "members/index";
     }
+
+    @GetMapping("/members/{id}/edit")
+    public String edit(@PathVariable Long id, Model model) {
+        Member memberEntity = memberRepository.findById(id).orElse(null);
+        model.addAttribute("member", memberEntity);
+        return "members/edit";
+    }
+    @PostMapping("/members/update")
+    public String update(MemberForm form) {
+        // 1. DTO 엔티티로 변환하기
+        Member memberEntity = form.toEntity();
+        // 2. 엔티티 레포지토리에 저장하기
+        // 2-1. 해당 엔티티 데이터베이스에 있는지 검색하기
+        Member target = memberRepository.findById(memberEntity.getId()).orElse(null);
+        // 2-2. 있다면 갱신하기
+        if (target != null) {
+            memberRepository.save(memberEntity);
+        }
+        // 3. 글 상세 페이지 리다이렉트
+        return "redirect:/members/" + memberEntity.getId();
+    }
 }
