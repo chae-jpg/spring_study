@@ -11,22 +11,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 @Getter
-public class Article {
+public class Coffee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
-    private String title;
+    private String name;
     @Column
-    private String content;
-
-
-    public void patch(Article article) {
-        if (article.title != null) {
-            this.title = title;
-        }
-        if (article.content != null) {
-            this.content = content;
-        }
-    }
+    private String price;
 }
